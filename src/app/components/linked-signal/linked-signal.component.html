@@ -1,0 +1,9 @@
+<h3>Computed signal</h3>
+<p>{{ shippingOptionsLength() }}</p>
+<p>{{ shippingOptions() | json}}>
+
+<h3>Linked signal</h3>
+<p>{{ selectedOption() | json }}</p>
+<button  (click)="changeShipping(2)" mat-flat-button>Change shipping option</button>
+
+<button (click)="changeShippingOptions()" mat-raised-button>Change selected shipping option</button>

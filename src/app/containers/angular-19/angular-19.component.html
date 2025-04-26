@@ -1,0 +1,47 @@
+<h2>Angular 19 new features
+  2024 NOV 19
+</h2>
+
+<ul>
+ <li>Input, Output, model, ViewChild etc. signal stable</li>
+ <li>
+  <a mat-raised-button target="_blank" href="https://blog.angular.dev/introducing-let-in-angular-686f9f383f0f">Let syntax stable</a>
+   </li>
+ <li>Experimental linkedSignal and resource API</li>
+ <li>Signal refactoring tool 3 seperate  </li>
+ <li>Mat.theme simplified customization, and component level override   </li>
+ <li>Angular material time picker   </li>
+ <li>Reporting unused imports in standalone components</li>
+ <li>19.2 {{ `support ${untaggedTemlate} literals in expressions` }}</li>
+</ul>
+
+<section class="feature-showcase" aria-labelledby="feature-showcase" >
+  <h2 id="feature-showcase" >Feature showcase</h2>
+  <form [formGroup]="myForm">
+    <mat-form-field  appearance="fill" >
+      <mat-label>Feature selector</mat-label>
+      <mat-select formControlName="myControl">
+        @for (option of options(); track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  @let test = valueChanges$ | async;
+
+
+  @switch (test) {
+    @case ('resourceSignal') {
+      <app-resource-signal/>
+    }
+    @case ('linkedSignal') {
+      <app-linked-signal/>
+    }
+    @default {
+      <app-horizontal-drag-and-drop />
+    }
+  }
+
+</section>
+

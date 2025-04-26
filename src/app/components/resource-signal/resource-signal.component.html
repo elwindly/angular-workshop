@@ -1,0 +1,54 @@
+<form>
+  <div class="card-grid">
+
+    <mat-form-field  appearance="fill" >
+      <mat-label>Original Name</mat-label>
+      <input matInput [(ngModel)]="originalName" name="originalName" type="text">
+    </mat-form-field>
+    <mat-form-field  appearance="fill" >
+      <mat-label>English Name</mat-label>
+      <input matInput [(ngModel)]="englishName" name="englishName" type="text">
+    </mat-form-field>
+
+  </div>
+  <div class="mt-10 mb-10">
+    @if (loading()) {
+      <mat-spinner></mat-spinner>
+    } @else {
+      <button
+      type="button"
+      mat-flat-button
+      (click)="reloadDesserts()"
+      class="btn ml-2"
+      [disabled]="loading()"
+    >
+      Reload desserts
+    </button>
+    }
+  </div>
+</form>
+
+<div class="card-grid">
+  @for (dessert of desserts(); track dessert.id) {
+    <mat-card class="example-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>{{ dessert.originalName }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ dessert.englishName }}</p>
+      </mat-card-content>
+      <mat-card-footer class="example-card-footer">
+        <mat-chip-set aria-label="Chihuahua traits">
+          <mat-chip>Rating {{ dessert.rating }}</mat-chip>
+
+        </mat-chip-set>
+      </mat-card-footer>
+    </mat-card>
+
+
+
+  }
+  @if (desserts().length === 0 && !loading()) {
+    <p class="text-lg">Sorry, no desserts found.</p>
+  }
+</div>

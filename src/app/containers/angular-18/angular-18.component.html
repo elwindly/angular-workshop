@@ -1,0 +1,29 @@
+<h2>Angular 18 new features
+  2024 MAY 22
+</h2>
+
+<ul>
+ <li>Experimental support for zoneless change detection</li>
+ <li>Material 3 and control flow and Deferable view are  stable </li>
+ <li>Spcifying default content for ng-content
+
+  <app-default-content>
+    <span class="greeting">Good morning </span>
+  </app-default-content>
+  <app-default-content>
+  </app-default-content></li>
+ <li>Unified control state change events (Reactive forms)
+  <form [formGroup]="myForm">
+    <mat-form-field  appearance="fill" >
+      <mat-label>Input</mat-label>
+      <input matInput [formControl]="myForm.controls.myControl">
+    </mat-form-field>
+  </form>
+ </li>
+ <li>Route redirects as functions  </li>
+</ul>
+
+
+
+
+
