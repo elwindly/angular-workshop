@@ -43,11 +43,11 @@ export class ResourceSignalComponent {
   }));
 
   // Define resource with request (=search criteria) and loader
-  // Every time, the request (criteria) is changing, the loader is triggered
+  // Every time, the search criteria is changing, the loader is triggered
   dessertsResource = resource({
-    request: this.dessertsCriteria,
+    params: this.dessertsCriteria,
     loader: (param) => {
-      return this.#dessertService.findPromise(param.request, param.abortSignal);
+      return this.#dessertService.findPromise(param.params, param.abortSignal);
     },
   });
 
