@@ -4,15 +4,16 @@ import {
   HostListener,
   Input,
   OnInit,
+  inject,
 } from '@angular/core';
 
 @Directive({
   selector: '[appBorder]',
 })
 export class BorderDirective implements OnInit {
-  @Input() color = 'red';
+  private el = inject(ElementRef);
 
-  constructor(private el: ElementRef) {}
+  @Input() color = 'red';
 
   ngOnInit() {
     this.border('');
