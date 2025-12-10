@@ -1,6 +1,5 @@
 import {
   ApplicationConfig,
-  provideZoneChangeDetection,
   provideZonelessChangeDetection,
 } from '@angular/core';
 import {
@@ -16,7 +15,6 @@ import { TemplatePageTitleStrategy } from './services/title-strategy.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideZonelessChangeDetection(),
     provideHttpClient(),
     provideImgixLoader('http://localhost:4200/'),
