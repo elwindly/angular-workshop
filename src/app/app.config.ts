@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
 import {
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZonelessChangeDetection(),
     provideHttpClient(),
+    provideBrowserGlobalErrorListeners(),
     provideImgixLoader('http://localhost:4200/'),
     provideRouter(routes, withComponentInputBinding()),
     { provide: TitleStrategy, useClass: TemplatePageTitleStrategy },
