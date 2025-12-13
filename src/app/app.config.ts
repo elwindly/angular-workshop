@@ -1,7 +1,6 @@
 import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
-  provideZonelessChangeDetection,
 } from '@angular/core';
 import {
   provideRouter,
@@ -16,7 +15,6 @@ import { TemplatePageTitleStrategy } from './services/title-strategy.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZonelessChangeDetection(),
     provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
     provideImgixLoader('http://localhost:4200/'),
