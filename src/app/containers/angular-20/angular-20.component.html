@@ -2,11 +2,19 @@
   2025 MAY 26
 </h2>
 
-
 <ul>
-  <li>The Dawn of Zoneless Change Detection</li>
-  <li>Signal-Based Forms: A Reactive Revolution </li>
-  <li>Selectorless components</li>
-  <li>New default test runner</li>
-  <li>Improving signals</li>
- </ul>
+  <li>Stabilized Signal-based APIs: toSignal(), toObservable(), and linkedSignal() now stable and production-ready</li>
+  <li>Control Flow Syntax: Stabilized @'if', @'for', @'switch', @'case', and @'let' for cleaner templates (ngIf/ngFor/ngSwitch deprecated)</li>
+  <li>Zoneless Change Detection: Moved to developer preview with improved performance without Zone.js</li>
+  <li>Enhanced Dependency Injection: Removed InjectFlags API, improved type safety in Injector.get()</li>
+  <li>Template Expression Improvements: Support for exponentiation operator (**), in keyword, void operator, and tagged template literals in expressions</li>
+  <li>Incremental Hydration API: Stabilized for better server-side rendering performance</li>
+  <li>Dynamic Component Features: Add input binding support, two-way bindings, and directives on dynamically-created components</li>
+  <li>Router Enhancements: Asynchronous redirects support, ability to directly abort navigation, improved type safety on route guards</li>
+  <li>Forms Improvements: markAllAsDirty method added, ability to reset forms without emitting events</li>
+  <li>Testing: New TestBed.tick() API, improved error handling and reporting in tests, enhanced Chromium/Playwright support</li>
+  <li>Performance: Chrome DevTools profiling integration, DI profiling events, reduced allocations for template let declarations</li>
+  <li>ng-reflect Attributes: Deprecated by default (use provideNgReflectAttributes() to re-enable if needed)</li>
+  <li>TypeScript 5.8+ Requirement: Dropped support for TypeScript older than 5.8</li>
+  <li>Node.js Updates: Minimum Node.js 20.19, with support for 22.12 and 24.0+ (dropped support for Node 18 and 22.0-22.10)</li>
+</ul>
