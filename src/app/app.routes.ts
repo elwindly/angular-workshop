@@ -69,6 +69,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'angular-21',
+    loadComponent: () =>
+      import('./containers/angular-21/angular-21.component').then(
+        (m) => m.Angular21Component
+      ),
+  },
+  {
     path: 'test-redirect-page',
     redirectTo: ({ queryParams }) => {
       const errorHandler = inject(ErrorHandler);

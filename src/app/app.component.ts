@@ -30,5 +30,6 @@ export class AppComponent {
     'angular-18',
     'angular-19',
     'angular-20',
+    'angular-21',
   ]);
 }
