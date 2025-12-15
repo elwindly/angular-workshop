@@ -9,13 +9,14 @@ import {
 } from '@angular/router';
 
 import { provideImgixLoader } from '@angular/common';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
+import { loggerInterceptor } from './services/logger.interceptor';
 import { TemplatePageTitleStrategy } from './services/title-strategy.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([loggerInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideImgixLoader('http://localhost:4200/'),
     provideRouter(routes, withComponentInputBinding()),
