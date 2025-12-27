@@ -153,3 +153,10 @@ src/app/
 | Generate component | `ng generate component path/name` |
 | Build for prod     | `ng build`                        |
 | Lint code          | `ng lint`                         |
+
+## Assistant Guidance
+
+- **Prefer Angular solutions over native APIs:** Use Angular-provided solutions instead of directly manipulating native APIs; for example, prefer the signal form `[field]` directive for forms rather than wiring native inputs manually.
+- **Always use control flow:** Prefer Angular's template control-flow constructs (e.g., `@if`/`@for` or `*ngIf`/`*ngFor`) for conditional rendering and lists — avoid manual DOM manipulation for reactive rendering.
+- **Use Angular Material:** Use Angular Material components for UI controls and consistent styling; import modules per-component rather than globally.
+- **Do not use deprecated features:** Avoid deprecated APIs and patterns; prefer the modern, supported Angular APIs and follow the project's best-practices.
