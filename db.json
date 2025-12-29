@@ -9,5 +9,6 @@
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "checkUsername": true
 }
