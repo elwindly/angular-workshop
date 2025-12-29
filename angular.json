@@ -28,10 +28,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "@angular/material/prebuilt-themes/cyan-orange.css",
-              "src/styles.scss"
-            ],
+            "styles": ["@angular/material/prebuilt-themes/cyan-orange.css", "src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -89,7 +86,8 @@
     }
   },
   "cli": {
-    "schematicCollections": ["angular-eslint"]
+    "schematicCollections": ["angular-eslint"],
+    "packageManager": "npm"
   },
   "schematics": {
     "@schematics/angular:component": {

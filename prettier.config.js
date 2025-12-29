@@ -6,11 +6,19 @@ module.exports = {
   useTabs: false,
   semi: true,
   singleQuote: true,
-  quoteProps: "as-needed",
-  trailingComma: "all",
+  quoteProps: 'as-needed',
+  trailingComma: 'all',
   bracketSpacing: true,
   bracketSameLine: false,
-  arrowParens: "always",
-  proseWrap: "preserve",
-  endOfLine: "lf",
+  arrowParens: 'always',
+  proseWrap: 'preserve',
+  endOfLine: 'lf',
+  overrides: [
+    {
+      files: '*.html',
+      options: {
+        parser: 'angular',
+      },
+    },
+  ],
 };
