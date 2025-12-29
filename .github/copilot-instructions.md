@@ -112,6 +112,111 @@ isLoading = this.dessertsResource.isLoading; // Signal<boolean>
 error = this.dessertsResource.error; // Signal<Error | null>
 ```
 
+### Signal Forms (Angular 21)
+
+Always use Signal Forms for any new or refactored forms. Prefer the schema-based validation API and the `Field` directive for binding.
+
+Example: minimal signal form with validation
+
+```typescript
+import { Component, ChangeDetectionStrategy, signal } from "@angular/core";
+import { Field, form, required, email, min, max, minLength, maxLength, validate } from "@angular/forms/signals";
+
+interface RegistrationModel {
+  username: string | null;
+  email: string | null;
+  age: number | null;
+  bio: string | null;
+  termsAccepted: boolean | null;
+}
+
+@Component({
+  selector: "app-registration",
+  imports: [Field],
+  template: `
+    <form [form]="registrationForm">
+      <label>
+        Username
+        <input [field]="registrationForm.username" />
+      </label>
+      <label>
+        Email
+        <input type="email" [field]="registrationForm.email" />
+      </label>
+      <label>
+        Age
+        <input type="number" [field]="registrationForm.age" />
+      </label>
+      <label>
+        Bio
+        <textarea [field]="registrationForm.bio"></textarea>
+      </label>
+      <label> <input type="checkbox" [field]="registrationForm.termsAccepted" /> Accept terms </label>
+      <button type="submit">Submit</button>
+    </form>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class RegistrationComponent {
+  model = signal<RegistrationModel>({
+    username: null,
+    email: null,
+    age: null,
+    bio: null,
+    termsAccepted: null,
+  });
+
+  registrationForm = form(this.model, (schemaPath) => {
+    // Required + length
+    required(schemaPath.username, { message: "Username is required" });
+    minLength(schemaPath.username, 3, { message: "Min 3 characters" });
+    maxLength(schemaPath.username, 20, { message: "Max 20 characters" });
+
+    // Email
+    required(schemaPath.email, { message: "Email is required" });
+    email(schemaPath.email, { message: "Enter a valid email" });
+
+    // Numeric range
+    required(schemaPath.age, { message: "Age is required" });
+    min(schemaPath.age, 18, { message: "Must be at least 18" });
+    max(schemaPath.age, 120, { message: "Please enter a valid age" });
+
+    // Custom validation (bio word count 10–100)
+    validate(schemaPath.bio, ({ value }) => {
+      const text = value();
+      if (!text) return null;
+      const words = text
+        .trim()
+        .split(/\s+/)
+        .filter((w) => w.length);
+      const count = words.length;
+      if (count < 10) return { kind: "minWords", message: `Minimum 10 words (current: ${count})` };
+      if (count > 100) return { kind: "maxWords", message: `Maximum 100 words (current: ${count})` };
+      return null;
+    });
+
+    // Terms must be accepted
+    validate(schemaPath.termsAccepted, ({ value }) => {
+      return value() ? null : { kind: "required", message: "You must accept the terms" };
+    });
+  });
+}
+```
+
+Notes:
+
+- Bind forms with `[form]` and fields with `[field]` from `@angular/forms/signals`.
+- Use field state signals in templates: `registrationForm.username().invalid()` and `pending()` for async.
+- Prefer schema validators (`required`, `email`, `min`, `max`, `minLength`, `maxLength`, `validate`).
+
+Signal Forms resources (Angular official docs):
+
+- Overview: https://angular.dev/guide/forms/signals/overview
+- Models: https://angular.dev/guide/forms/signals/models
+- Validation: https://angular.dev/guide/forms/signals/validation
+- Field state management: https://angular.dev/guide/forms/signals/field-state-management
+- Custom controls: https://angular.dev/guide/forms/signals/custom-controls
+
 ### Directives (Attribute Directives)
 
 See [BorderDirective](src/app/directives/border.directive.ts): selector `[appBorder]`, inject ElementRef, use @HostListener for DOM events.
@@ -156,7 +261,14 @@ src/app/
 
 ## Assistant Guidance
 
-- **Prefer Angular solutions over native APIs:** Use Angular-provided solutions instead of directly manipulating native APIs; for example, prefer the signal form `[field]` directive for forms rather than wiring native inputs manually.
+- **Prefer Angular solutions over native APIs:** Use Angular-provided solutions instead of directly manipulating native APIs; for example, prefer the Signal Forms `[field]` directive for forms rather than wiring native inputs manually.
 - **Always use control flow:** Prefer Angular's template control-flow constructs (e.g., `@if`/`@for` or `*ngIf`/`*ngFor`) for conditional rendering and lists — avoid manual DOM manipulation for reactive rendering.
 - **Use Angular Material:** Use Angular Material components for UI controls and consistent styling; import modules per-component rather than globally.
 - **Do not use deprecated features:** Avoid deprecated APIs and patterns; prefer the modern, supported Angular APIs and follow the project's best-practices.
+
+### Forms Policy
+
+- Always use Signal Forms (`@angular/forms/signals`) for new or refactored forms.
+- Bind with `[form]` and `[field]`; avoid `FormGroup`/`FormControl` unless explicitly required for legacy demos.
+- Define validation in the schema function with built-in rules and `validate()` for custom logic.
+- Show errors reactively using field state (`invalid()`, `errors()`, `touched()`, `pending()`).
