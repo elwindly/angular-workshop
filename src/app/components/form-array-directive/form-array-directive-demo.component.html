@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>FormArrayDirective Demo</mat-card-title>
+    <mat-card-subtitle>Reactive forms array using <code>formArrayName</code></mat-card-subtitle>
+    <mat-card-subtitle
+      >This is useful when the form does not use a top-level `FormGroup`, and the array itself
+      represents the full form model</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="form" class="form-array-demo">
+      <!-- The FormArrayDirective is applied here via formArrayName -->
+      <div formArrayName="items" class="items">
+        @if (items.length === 0) {
+          <p class="empty">No items yet — add one!</p>
+        }
+        @for (ctrl of items.controls; track $index) {
+          <div class="row">
+            <input type="text" [formControl]="ctrl" placeholder="Enter item" />
+            <button type="button" mat-button color="warn" (click)="removeItem($index)">
+              Remove
+            </button>
+          </div>
+        }
+      </div>
+
+      <div class="actions">
+        <button type="button" mat-raised-button color="primary" (click)="addItem()">
+          Add Item
+        </button>
+        <button type="button" mat-button (click)="setPreset()">Load Preset</button>
+      </div>
+    </form>
+
+    <h4>Form Value</h4>
+    <pre>{{ form.value | json }}</pre>
+  </mat-card-content>
+</mat-card>

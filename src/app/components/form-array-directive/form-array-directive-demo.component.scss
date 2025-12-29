@@ -1,0 +1,27 @@
+.form-array-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.empty {
+  color: #777;
+  font-style: italic;
+}
