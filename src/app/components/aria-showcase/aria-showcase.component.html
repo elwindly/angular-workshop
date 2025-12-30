@@ -1,0 +1,275 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Angular ARIA Showcase</mat-card-title>
+    <mat-card-subtitle
+      >New in Angular 21: Headless accessible directives from @angular/aria</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <div class="aria-demos">
+      <!-- Toolbar Demo -->
+      <section class="demo-section">
+        <h3>Toolbar <span class="badge">ngToolbar</span></h3>
+        <p class="description">
+          Accessible toolbar with keyboard navigation (arrow keys), focus management, and grouped
+          widgets.
+        </p>
+
+        <div ngToolbar aria-label="Text Formatting Tools" class="toolbar">
+          <div class="toolbar-group">
+            <button
+              ngToolbarWidget
+              value="undo"
+              type="button"
+              aria-label="Undo"
+              (click)="handleToolbarAction('undo')"
+              class="toolbar-button"
+            >
+              <mat-icon>undo</mat-icon>
+            </button>
+            <button
+              ngToolbarWidget
+              value="redo"
+              type="button"
+              aria-label="Redo"
+              (click)="handleToolbarAction('redo')"
+              class="toolbar-button"
+            >
+              <mat-icon>redo</mat-icon>
+            </button>
+          </div>
+
+          <div class="toolbar-separator" role="separator"></div>
+
+          <div class="toolbar-group">
+            <button
+              ngToolbarWidget
+              value="bold"
+              type="button"
+              aria-label="Bold"
+              [attr.aria-pressed]="boldActive()"
+              (click)="handleToolbarAction('bold')"
+              class="toolbar-button"
+            >
+              <mat-icon>format_bold</mat-icon>
+            </button>
+            <button
+              ngToolbarWidget
+              value="italic"
+              type="button"
+              aria-label="Italic"
+              [attr.aria-pressed]="italicActive()"
+              (click)="handleToolbarAction('italic')"
+              class="toolbar-button"
+            >
+              <mat-icon>format_italic</mat-icon>
+            </button>
+            <button
+              ngToolbarWidget
+              value="underline"
+              type="button"
+              aria-label="Underline"
+              [attr.aria-pressed]="underlineActive()"
+              (click)="handleToolbarAction('underline')"
+              class="toolbar-button"
+            >
+              <mat-icon>format_underlined</mat-icon>
+            </button>
+          </div>
+
+          <div class="toolbar-separator" role="separator"></div>
+
+          <div
+            ngToolbarWidgetGroup
+            role="radiogroup"
+            class="toolbar-group"
+            aria-label="Text alignment"
+          >
+            <button
+              ngToolbarWidget
+              role="radio"
+              type="button"
+              value="left"
+              aria-label="Align left"
+              [attr.aria-checked]="alignment() === 'left'"
+              (click)="handleToolbarAction('left')"
+              class="toolbar-button"
+            >
+              <mat-icon>format_align_left</mat-icon>
+            </button>
+            <button
+              ngToolbarWidget
+              role="radio"
+              type="button"
+              value="center"
+              aria-label="Align center"
+              [attr.aria-checked]="alignment() === 'center'"
+              (click)="handleToolbarAction('center')"
+              class="toolbar-button"
+            >
+              <mat-icon>format_align_center</mat-icon>
+            </button>
+            <button
+              ngToolbarWidget
+              role="radio"
+              type="button"
+              value="right"
+              aria-label="Align right"
+              [attr.aria-checked]="alignment() === 'right'"
+              (click)="handleToolbarAction('right')"
+              class="toolbar-button"
+            >
+              <mat-icon>format_align_right</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="state-display">
+          <strong>State:</strong> Bold: {{ boldActive() }}, Italic: {{ italicActive() }}, Underline:
+          {{ underlineActive() }}, Alignment: {{ alignment() }}
+        </div>
+      </section>
+
+      <!-- Menu Demo -->
+      <section class="demo-section">
+        <h3>Menu <span class="badge">ngMenu</span></h3>
+        <p class="description">
+          Accessible dropdown menu with keyboard navigation (arrows, Enter/Space, Escape) and screen
+          reader support.
+        </p>
+
+        <button mat-raised-button color="primary" ngMenuTrigger [menu]="fileMenu">
+          File Menu
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+
+        <div ngMenu #fileMenu="ngMenu" class="menu-panel">
+          <button
+            ngMenuItem
+            value="new-file"
+            (click)="handleMenuAction('New File')"
+            class="menu-item"
+          >
+            <mat-icon>insert_drive_file</mat-icon>
+            <span>New File</span>
+            <span class="shortcut">Ctrl+N</span>
+          </button>
+          <button ngMenuItem value="open" (click)="handleMenuAction('Open')" class="menu-item">
+            <mat-icon>folder_open</mat-icon>
+            <span>Open</span>
+            <span class="shortcut">Ctrl+O</span>
+          </button>
+          <button ngMenuItem value="save" (click)="handleMenuAction('Save')" class="menu-item">
+            <mat-icon>save</mat-icon>
+            <span>Save</span>
+            <span class="shortcut">Ctrl+S</span>
+          </button>
+          <div class="menu-separator" role="separator"></div>
+          <button ngMenuItem value="export" (click)="handleMenuAction('Export')" class="menu-item">
+            <mat-icon>file_download</mat-icon>
+            <span>Export</span>
+          </button>
+          <button ngMenuItem value="print" (click)="handleMenuAction('Print')" class="menu-item">
+            <mat-icon>print</mat-icon>
+            <span>Print</span>
+            <span class="shortcut">Ctrl+P</span>
+          </button>
+        </div>
+
+        <div class="state-display"><strong>Last Action:</strong> {{ lastAction() }}</div>
+      </section>
+
+      <!-- Accordion Demo -->
+      <section class="demo-section">
+        <h3>Accordion <span class="badge">ngAccordionGroup</span></h3>
+        <p class="description">
+          Accessible accordion with keyboard navigation, expandable panels, and proper ARIA
+          attributes.
+        </p>
+
+        <div ngAccordionGroup class="accordion">
+          <h3>
+            <span
+              ngAccordionTrigger
+              panelId="panel1"
+              #trigger1="ngAccordionTrigger"
+              class="accordion-trigger"
+            >
+              <mat-icon>info</mat-icon>
+              <span>What is Angular ARIA?</span>
+              <mat-icon class="expand-icon" [class.expanded]="trigger1.expanded()"
+                >expand_more</mat-icon
+              >
+            </span>
+          </h3>
+          <div ngAccordionPanel panelId="panel1">
+            <ng-template ngAccordionContent>
+              <div class="accordion-content">
+                <p>
+                  Angular ARIA is a collection of headless, accessible directives that implement
+                  common WAI-ARIA patterns. The directives handle keyboard interactions, ARIA
+                  attributes, focus management, and screen reader support.
+                </p>
+              </div>
+            </ng-template>
+          </div>
+
+          <h3>
+            <span
+              ngAccordionTrigger
+              panelId="panel2"
+              #trigger2="ngAccordionTrigger"
+              class="accordion-trigger"
+            >
+              <mat-icon>accessibility_new</mat-icon>
+              <span>Why use Angular ARIA?</span>
+              <mat-icon class="expand-icon" [class.expanded]="trigger2.expanded()"
+                >expand_more</mat-icon
+              >
+            </span>
+          </h3>
+          <div ngAccordionPanel panelId="panel2">
+            <ng-template ngAccordionContent>
+              <div class="accordion-content">
+                <p>
+                  Building accessible components according to W3C Accessibility Guidelines requires
+                  significant effort and expertise. Angular ARIA provides battle-tested
+                  implementations so you can focus on styling and business logic.
+                </p>
+              </div>
+            </ng-template>
+          </div>
+
+          <h3>
+            <span
+              ngAccordionTrigger
+              panelId="panel3"
+              #trigger3="ngAccordionTrigger"
+              class="accordion-trigger"
+            >
+              <mat-icon>playlist_add_check</mat-icon>
+              <span>What's included?</span>
+              <mat-icon class="expand-icon" [class.expanded]="trigger3.expanded()"
+                >expand_more</mat-icon
+              >
+            </span>
+          </h3>
+          <div ngAccordionPanel panelId="panel3">
+            <ng-template ngAccordionContent>
+              <div class="accordion-content">
+                <p>Angular ARIA includes directives for common patterns:</p>
+                <ul>
+                  <li>
+                    <strong>Selection:</strong> Autocomplete, Listbox, Select, Multiselect, Combobox
+                  </li>
+                  <li><strong>Navigation:</strong> Menu, Menubar, Toolbar</li>
+                  <li><strong>Organization:</strong> Accordion, Tabs, Tree, Grid</li>
+                </ul>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </section>
+    </div>
+  </mat-card-content>
+</mat-card>

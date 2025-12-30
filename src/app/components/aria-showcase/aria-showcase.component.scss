@@ -1,0 +1,241 @@
+.aria-demos {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.demo-section {
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-primary);
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  .description {
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+.state-display {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--md-sys-color-surface-dim);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+// Toolbar Styles
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 8px;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.toolbar-separator {
+  width: 1px;
+  height: 32px;
+  background: var(--md-sys-color-outline);
+}
+
+.toolbar-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--md-sys-color-on-surface);
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: var(--md-sys-color-surface-dim);
+  }
+
+  &:focus {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+  }
+
+  &[aria-pressed='true'],
+  &[aria-checked='true'] {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-primary);
+  }
+}
+
+// Menu Styles
+.menu-panel {
+  background: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  min-width: 220px;
+}
+
+.menu-item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: left;
+  color: var(--md-sys-color-on-surface);
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  span:first-of-type {
+    flex: 1;
+  }
+
+  .shortcut {
+    font-size: 0.75rem;
+    color: var(--md-sys-color-on-surface-variant);
+  }
+
+  &:hover {
+    background: var(--md-sys-color-surface-dim);
+  }
+
+  &:focus {
+    background: var(--md-sys-color-primary-container);
+    outline: none;
+  }
+}
+
+.menu-separator {
+  height: 1px;
+  background: var(--md-sys-color-outline);
+  margin: 0.5rem 0;
+}
+
+// Accordion Styles
+.accordion {
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 8px;
+  overflow: hidden;
+
+  h3 {
+    margin: 0;
+    border-bottom: 1px solid var(--md-sys-color-outline);
+    font-size: 1rem;
+    font-weight: 500;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+}
+
+.accordion-trigger {
+  width: 100%;
+  border: none;
+  background: var(--md-sys-color-surface);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: left;
+  font-size: 1rem;
+
+  mat-icon:first-child {
+    color: var(--md-sys-color-primary);
+  }
+
+  span {
+    flex: 1;
+    font-weight: 500;
+  }
+
+  .expand-icon {
+    transition: transform 0.3s;
+
+    &.expanded {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    background: var(--md-sys-color-surface-dim);
+  }
+
+  &:focus {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: -2px;
+  }
+}
+
+.accordion-content {
+  padding: 1rem;
+  background: var(--md-sys-color-surface-dim);
+  animation: slideDown 0.3s ease-out;
+
+  p {
+    margin: 0 0 1rem 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul {
+    margin: 0.5rem 0 0 1.5rem;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
