@@ -1,11 +1,22 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
 
 html,
 body {
   height: 100%;
   color-scheme: light dark;
+
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$violet-palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
