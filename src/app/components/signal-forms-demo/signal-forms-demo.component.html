@@ -132,14 +132,14 @@
         </div>
 
         <!-- Form Status -->
-        <div class="form-status">
+        <div class="form-status mat-bg-primary-container mat-elevation-z2">
           <p>
             <strong>Form Status:</strong>
-            {{ signalUserForm().valid() ? "Valid ✓" : "Invalid ✗" }}
+            {{ signalUserForm().valid() ? 'Valid ✓' : 'Invalid ✗' }}
           </p>
           <p>
             <strong>Form Touched:</strong>
-            {{ signalUserForm().touched() ? "Yes" : "No" }}
+            {{ signalUserForm().touched() ? 'Yes' : 'No' }}
           </p>
         </div>
       </form>

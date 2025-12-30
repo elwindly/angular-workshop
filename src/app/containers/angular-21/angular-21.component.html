@@ -1,13 +1,16 @@
 <h2>Angular 21 highlights 2025 — v21.0.0</h2>
 
 <ul>
-  <li>Navigation API experimental support (platform integration)</li>
+  <li>Zoneless by default</li>
+  <li>
+    Vitest as the new default, stable test runner
+    <code>ng g @schematics/angular:refactor-jasmine-vitest</code>
+  </li>
   <li>Signal-based forms: experimental signal forms and new <code>debounce()</code> rule</li>
   <li>
     Zoneless by default migration support and improvements for server bootstrapping
     (BootstrapContext)
   </li>
-  <li>BootstrapContext for improved server bootstrapping (server-side API changes)</li>
   <li>
     Control flow and template improvements: better typing and template expression fixes (regex in
     templates, improved <code>&#64;for</code> reactivity)
@@ -26,10 +29,7 @@
     Tooling/migrations: new migrations for control flow, ngClass/ngStyle conversions and standalone
     support
   </li>
-  <li>
-    Platform and runtime: move toward drop of Zone defaults, remove deprecated metadata and APIs
-    (moduleId, ApplicationConfig export refactor)
-  </li>
+
   <li>
     Compatibility notes: minimum TypeScript raised (no older than 5.9) and Node.js runtime
     requirements updated

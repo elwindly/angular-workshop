@@ -2,59 +2,43 @@
 
 <ul>
   <li>
-    Stabilized Signal-based APIs: toSignal(), toObservable(), and linkedSignal()
-    now stable and production-ready
+    Stabilized Signal-based APIs: toSignal(), toObservable(), and linkedSignal() now stable and
+    production-ready
   </li>
   <li>
-    Control Flow Syntax: Stabilized @'if', @'for', @'switch', @'case', and
-    @'let' for cleaner templates (ngIf/ngFor/ngSwitch deprecated)
+    Control Flow Syntax: Stabilized @'if', @'for', @'switch', @'case', and @'let' for cleaner
+    templates (ngIf/ngFor/ngSwitch deprecated)
   </li>
   <li>
-    Zoneless Change Detection: Moved to developer preview with improved
-    performance without Zone.js
+    Zoneless Change Detection: Moved to developer preview with improved performance without Zone.js
+    20.2 production ready
+  </li>
+  <li>Experimental MCP server to help with LLM codegen</li>
+  <li>
+    Template Expression Improvements: Support for exponentiation operator (**), in keyword, void
+    operator, and tagged template literals in expressions
+  </li>
+  <li>CDK Drag&Drop improvement to allow copying items between lists</li>
+  <li>
+    Dynamic Component Features: Add input binding support, two-way bindings, and directives on
+    dynamically-created components
   </li>
   <li>
-    Enhanced Dependency Injection: Removed InjectFlags API, improved type safety
-    in Injector.get()
+    Router Enhancements: Asynchronous redirects support, ability to directly abort navigation,
+    improved type safety on route guards
   </li>
   <li>
-    Template Expression Improvements: Support for exponentiation operator (**),
-    in keyword, void operator, and tagged template literals in expressions
+    Forms Improvements: markAllAsDirty method added, ability to reset forms without emitting events
   </li>
+  <li>Route visualization and signal graph in Angular DevTools</li>
   <li>
-    Incremental Hydration API: Stabilized for better server-side rendering
-    performance
+    Animations: New animation APIs for more dynamic and flexible animations
+    <a href="https://angular.dev/guide/animations/css">Link to the official page</a>
   </li>
+  <li>TypeScript 5.8+ Requirement: Dropped support for TypeScript older than 5.8</li>
   <li>
-    Dynamic Component Features: Add input binding support, two-way bindings, and
-    directives on dynamically-created components
-  </li>
-  <li>
-    Router Enhancements: Asynchronous redirects support, ability to directly
-    abort navigation, improved type safety on route guards
-  </li>
-  <li>
-    Forms Improvements: markAllAsDirty method added, ability to reset forms
-    without emitting events
-  </li>
-  <li>
-    Testing: New TestBed.tick() API, improved error handling and reporting in
-    tests, enhanced Chromium/Playwright support
-  </li>
-  <li>
-    Performance: Chrome DevTools profiling integration, DI profiling events,
-    reduced allocations for template let declarations
-  </li>
-  <li>
-    ng-reflect Attributes: Deprecated by default (use
-    provideNgReflectAttributes() to re-enable if needed)
-  </li>
-  <li>
-    TypeScript 5.8+ Requirement: Dropped support for TypeScript older than 5.8
-  </li>
-  <li>
-    Node.js Updates: Minimum Node.js 20.19, with support for 22.12 and 24.0+
-    (dropped support for Node 18 and 22.0-22.10)
+    Node.js Updates: Minimum Node.js 20.19, with support for 22.12 and 24.0+ (dropped support for
+    Node 18 and 22.0-22.10)
   </li>
 </ul>
 
@@ -78,8 +62,14 @@
 }
 
 <h3>Single Post Details from httpResourcSignal signal (using Resource API)</h3>
-<p>HELPFUL: httpResource differs from the HttpClient as it initiates the request eagerly. In contrast, the HttpClient only initiates requests upon subscription to the returned Observable.</p>
-<p>TIP: Avoid using httpResource for mutations like POST or PUT. Instead, prefer directly using the underlying HttpClient APIs.</p>
+<p>
+  HELPFUL: httpResource differs from the HttpClient as it initiates the request eagerly. In
+  contrast, the HttpClient only initiates requests upon subscription to the returned Observable.
+</p>
+<p>
+  TIP: Avoid using httpResource for mutations like POST or PUT. Instead, prefer directly using the
+  underlying HttpClient APIs.
+</p>
 
 @if (postByIdHttpResource.hasValue()) {
   <p><strong>Title:</strong> {{ postByIdHttpResource.value().title }}</p>
@@ -92,22 +82,11 @@
   <p>No post selected</p>
 }
 
-<button
-  type="button"
-  mat-flat-button
-  (click)="loadPostNmber1()"
-  class="btn ml-2"
->
+<button type="button" mat-flat-button (click)="loadPostNmber1()" class="btn ml-2">
   Load first post
 </button>
 
-
 <div id="container"></div>
-<button
-  type="button"
-  mat-flat-button
-  (click)="showWarning()"
-  class="btn ml-2"
->
+<button type="button" mat-flat-button (click)="showWarning()" class="btn ml-2">
   Add warning component
 </button>
