@@ -1,8 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, effect, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
@@ -16,11 +18,16 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatSlideToggleModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  private readonly document = inject(DOCUMENT);
+
+  readonly isDark = signal(false);
+
   readonly navList = signal([
     'intro',
     'angular-14',
@@ -32,4 +39,18 @@ export class AppComponent {
     'angular-20',
     'angular-21',
   ]);
+
+  constructor() {
+    effect(() => this.applyTheme(this.isDark()));
+  }
+
+  toggleTheme(checked: boolean): void {
+    this.isDark.set(checked);
+  }
+
+  private applyTheme(isDark: boolean): void {
+    const root = this.document.documentElement.classList;
+    root.toggle('dark-mode', isDark);
+    root.toggle('light-theme', !isDark);
+  }
 }

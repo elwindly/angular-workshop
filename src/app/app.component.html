@@ -2,10 +2,14 @@
   <mat-toolbar class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name">Angular workshop</h1>
+    <span class="spacer"></span>
+    <mat-slide-toggle [checked]="isDark()" (change)="toggleTheme($event.checked)" color="accent">
+      Dark mode
+    </mat-slide-toggle>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav  #snav [mode]="'side'" fixedTopGap="56">
+    <mat-sidenav #snav [mode]="'side'" fixedTopGap="56">
       <mat-nav-list>
         @for (nav of navList(); track nav) {
           <a [routerLink]="nav" mat-list-item>{{ nav }}</a>
@@ -18,5 +22,3 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-
-
