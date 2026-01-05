@@ -1,69 +1,60 @@
-<h2>Angular 21 highlights 2025 — v21.0.0</h2>
+<section class="feature-list">
+  <h2>Angular 21 highlights 2025 — v21.0.0</h2>
 
-<ul>
-  <li>Zoneless by default</li>
-  <li>
-    Vitest as the new default, stable test runner
-    <code>ng g @schematics/angular:refactor-jasmine-vitest</code>
-  </li>
-  <li>Signal-based forms: experimental signal forms and new <code>debounce()</code> rule</li>
-  <li>
-    Zoneless by default migration support and improvements for server bootstrapping
-    (BootstrapContext)
-  </li>
-  <li>
-    Control flow and template improvements: better typing and template expression fixes (regex in
-    templates, improved <code>&#64;for</code> reactivity)
-  </li>
-  <li>
-    Enhanced compiler checks: host binding type-checking enabled by default and new diagnostics
-  </li>
-  <li>
-    Forms UX improvements: FormArrayDirective, better interop between signal forms and reactive
-    forms
-  </li>
-  <li>
-    Router: convert lastSuccessfulNavigation to a signal; various router memory/fix improvements
-  </li>
-  <li>
-    Tooling/migrations: new migrations for control flow, ngClass/ngStyle conversions and standalone
-    support
-  </li>
+  <ul class="main-list">
+    <li>Zoneless by default</li>
+    <li>
+      Vitest as the new default, stable test runner
+      <code>ng g @schematics/angular:refactor-jasmine-vitest</code>
+    </li>
+    <li>Signal-based forms: experimental signal forms and new <code>debounce()</code> rule</li>
+    <li>
+      Zoneless by default migration support and improvements for server bootstrapping
+      (BootstrapContext)
+    </li>
+    <li>
+      Control flow and template improvements: better typing and template expression fixes (regex in
+      templates, improved <code>&#64;for</code> reactivity)
+    </li>
+    <li>
+      Enhanced compiler checks: host binding type-checking enabled by default and new diagnostics
+    </li>
+    <li>
+      Forms UX improvements: FormArrayDirective, better interop between signal forms and reactive
+      forms
+    </li>
+    <li>
+      Router: convert lastSuccessfulNavigation to a signal; various router memory/fix improvements
+    </li>
+    <li>
+      Tooling/migrations: new migrations for control flow, ngClass/ngStyle conversions and
+      standalone support
+    </li>
 
-  <li>
-    Compatibility notes: minimum TypeScript raised (no older than 5.9) and Node.js runtime
-    requirements updated
-  </li>
-  <li>Release notes: https://github.com/angular/angular/releases/tag/21.0.0</li>
-</ul>
+    <li>
+      Compatibility notes: minimum TypeScript raised (no older than 5.9) and Node.js runtime
+      requirements updated
+    </li>
+    <li>
+      Tailwind CSS integration: improved support and official guidelines for using Tailwind CSS with
+      <a href="https://angular.dev/guide/tailwind">Official guide</a>
+    </li>
+    <li>
+      Theming improvements: new CSS variables and better integration with Material
+      <a href="https://material.angular.dev/guide/theming-your-components">Official guide</a>
+    </li>
+  </ul>
+</section>
 
 <section class="feature-showcase">
-  <h3>Signal Forms Demo</h3>
-  <p class="note">
-    Interactive form demonstrating reactive forms with signal integration, featuring 7 fields with
-    various validation types including asynchronous validation.
-  </p>
-
   <app-signal-forms-demo />
 </section>
 
 <section class="feature-showcase">
-  <h3>FormArrayDirective Demo</h3>
-  <p class="note">
-    Reactive forms array using <code>formArrayName</code> with add/remove and preset.
-  </p>
-
   <app-form-array-directive-demo />
 </section>
 
 <section class="feature-showcase">
-  <h3>Angular ARIA Components</h3>
-  <p class="note">
-    New in Angular 21: Headless, accessible directives from <code>@angular/aria</code> package
-    implementing WAI-ARIA patterns with keyboard navigation, focus management, and screen reader
-    support.
-  </p>
-
   <app-aria-showcase />
 </section>
 

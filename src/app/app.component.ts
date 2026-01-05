@@ -26,7 +26,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 export class AppComponent {
   private readonly document = inject(DOCUMENT);
 
-  readonly isDark = signal(false);
+  readonly isDark = signal(true);
 
   readonly navList = signal([
     'intro',

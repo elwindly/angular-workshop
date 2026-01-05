@@ -24,3 +24,11 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.main-list li:nth-child(even) {
+  color: var(--mat-sys-tertiary);
+}
+
+.main-list li {
+  padding: 0.2rem;
+}

@@ -12,6 +12,7 @@ import {
   resource,
   signal,
   twoWayBinding,
+  ViewContainerRef,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -31,6 +32,7 @@ export class Angular20Component {
   readonly isExpanded = signal(true);
 
   private readonly injector = inject(EnvironmentInjector);
+  private readonly vcr = inject(ViewContainerRef);
 
   posts$ = this.postService.getPosts();
 
@@ -52,29 +54,21 @@ export class Angular20Component {
     },
   });
 
-  postByIdSimpleHttpResource = httpResource<Post>(() =>
-    this.selectedId() ? `http://localhost:3000/posts/${this.selectedId()}` : '',
+  postByIdSimpleHttpResource = httpResource<Post | undefined>(() =>
+    this.selectedId() ? `http://localhost:3000/posts/${this.selectedId()}` : undefined,
   );
-
-  postByIdHttpResource = httpResource<Post>(() => ({
-    url: this.selectedId()
-      ? `http://localhost:3000/posts/${this.selectedId()}`
-      : '',
-    method: 'GET',
-    params: { id: this.selectedId() },
-  }));
 
   // initially, resources are undefined
   postFromResource = computed(() => this.postByIdPromise.value());
 
-  loadPostNmber1(): void {
-    this.selectedId.set('1');
+  loadPostNmber(postNumber: string): void {
+    this.selectedId.set(postNumber);
   }
 
   async showWarning() {
     const applicationRef = await bootstrapApplication(Angular20Component);
     const host = document.getElementById('container');
-    console.log('host', host);
+
     const ref = createComponent(AppWarningComponent, {
       hostElement: host!,
       environmentInjector: this.injector,
@@ -89,5 +83,19 @@ export class Angular20Component {
     });
 
     applicationRef.attachView(ref.hostView);
+  }
+
+  showWarning2() {
+    const compRef = this.vcr.createComponent(AppWarningComponent, {
+      bindings: [
+        inputBinding('canClose', this.canClose),
+        twoWayBinding('isExpanded', this.isExpanded),
+        outputBinding<boolean>('shouldClose', (confirmed) => {
+          console.log('Closed with result:', confirmed);
+          compRef.destroy();
+        }),
+      ],
+    });
+    this.vcr.insert(compRef.hostView);
   }
 }

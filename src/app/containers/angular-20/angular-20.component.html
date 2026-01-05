@@ -1,6 +1,6 @@
 <h2>Angular 20 new features 2025 MAY 26</h2>
 
-<ul>
+<ul class="main-list">
   <li>
     Stabilized Signal-based APIs: toSignal(), toObservable(), and linkedSignal() now stable and
     production-ready
@@ -18,7 +18,12 @@
     Template Expression Improvements: Support for exponentiation operator (**), in keyword, void
     operator, and tagged template literals in expressions
   </li>
-  <li>CDK Drag&Drop improvement to allow copying items between lists</li>
+  <li>
+    CDK Drag&Drop improvement to allow copying items between lists
+    <a href="https://angular.dev/guide/drag-drop#copying-items-between-lists" target="_blank"
+      >Link to the official page</a
+    >
+  </li>
   <li>
     Dynamic Component Features: Add input binding support, two-way bindings, and directives on
     dynamically-created components
@@ -33,12 +38,7 @@
   <li>Route visualization and signal graph in Angular DevTools</li>
   <li>
     Animations: New animation APIs for more dynamic and flexible animations
-    <a href="https://angular.dev/guide/animations/css">Link to the official page</a>
-  </li>
-  <li>TypeScript 5.8+ Requirement: Dropped support for TypeScript older than 5.8</li>
-  <li>
-    Node.js Updates: Minimum Node.js 20.19, with support for 22.12 and 24.0+ (dropped support for
-    Node 18 and 22.0-22.10)
+    <a href="https://angular.dev/guide/animations/css" target="_blank">Link to the official page</a>
   </li>
 </ul>
 
@@ -52,16 +52,19 @@
   }
 </ul>
 
-<h3>Single Post Details from resource signal (using Resource API)</h3>
-
-@if (postFromResource(); as post) {
-  <p><strong>Title:</strong> {{ post.title }}</p>
-  <p><strong>Views:</strong> {{ post.views }}</p>
-} @else {
-  <p>No post selected</p>
-}
+<h3>Dynamic component goes here</h3>
+<div id="container"></div>
+<ng-container #container />
+<button type="button" mat-flat-button (click)="showWarning2()" class="btn ml-2">
+  Add warning component
+</button>
 
 <h3>Single Post Details from httpResourcSignal signal (using Resource API)</h3>
+<a
+  href="https://www.angulararchitects.io/blog/learning-httpresource-with-super-mario/"
+  target="_blank"
+  >Supplementary resource</a
+>
 <p>
   HELPFUL: httpResource differs from the HttpClient as it initiates the request eagerly. In
   contrast, the HttpClient only initiates requests upon subscription to the returned Observable.
@@ -71,22 +74,25 @@
   underlying HttpClient APIs.
 </p>
 
-@if (postByIdHttpResource.hasValue()) {
-  <p><strong>Title:</strong> {{ postByIdHttpResource.value().title }}</p>
-  <p><strong>Views:</strong> {{ postByIdHttpResource.value().views }}</p>
-} @else if (postByIdHttpResource.error()) {
+@if (postByIdSimpleHttpResource.hasValue()) {
+  <p><strong>Title:</strong> {{ postByIdSimpleHttpResource.value().title }}</p>
+  <p><strong>Views:</strong> {{ postByIdSimpleHttpResource.value().views }}</p>
+} @else if (postByIdSimpleHttpResource.error()) {
   <div>Could not load post information</div>
-} @else if (postByIdHttpResource.isLoading()) {
+} @else if (postByIdSimpleHttpResource.isLoading()) {
   <div>Loading post details...</div>
 } @else {
   <p>No post selected</p>
 }
 
-<button type="button" mat-flat-button (click)="loadPostNmber1()" class="btn ml-2">
-  Load first post
-</button>
-
-<div id="container"></div>
-<button type="button" mat-flat-button (click)="showWarning()" class="btn ml-2">
-  Add warning component
-</button>
+<section class="action-container">
+  <button type="button" mat-flat-button (click)="loadPostNmber('1')" class="btn ml-2">
+    Load first post
+  </button>
+  <button type="button" mat-flat-button (click)="loadPostNmber('2')" class="btn ml-2">
+    Load second post
+  </button>
+  <button type="button" mat-flat-button (click)="loadPostNmber('')" class="btn ml-2">
+    Reset selected ID
+  </button>
+</section>
