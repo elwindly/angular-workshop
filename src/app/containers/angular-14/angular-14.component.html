@@ -1,9 +1,178 @@
-<h2>Angular 14 new features 2022 JUN 2</h2>
+<section class="feature-list">
+  <h2>Angular 14 highlights 2022 — v14.0.0</h2>
 
-<ul>
-  <li>Standalone components</li>
-  <li>Manipulate Title</li>
-  <li>Typed forms</li>
-  <li>{{ listItemTitle }}</li>
-  <li>{{ unnecessarayNullishOprator ?? '' }}</li>
-</ul>
+  <ul class="main-list">
+    <li>
+      <strong>Standalone Components</strong> - Create components without NgModules. This component
+      itself is standalone!
+      <code>@Component(&#123; standalone: true, imports: [...] &#125;)</code>
+    </li>
+    <li>
+      <strong>inject() Function</strong> - Modern dependency injection pattern replacing constructor
+      injection. Better type safety and compatibility with decorators.
+      <code>private service = inject(MyService);</code>
+    </li>
+    <li>
+      <strong>Typed Reactive Forms</strong> - Compile-time type safety for form controls and values.
+      Prevents runtime errors with type checking.
+      <code>FormGroup&lt;TypedForm&gt;</code>
+    </li>
+    <li>
+      <strong>Protected Members in Templates</strong> - Bind to protected class members directly in
+      templates. Example: <code>{{ featureTitle }}</code>
+    </li>
+    <li>
+      <strong>Page Title from Routes</strong> - Set page titles directly in route configuration.
+      See <code>app.routes.ts</code> for the <code>title</code> property.
+    </li>
+    <li>
+      <strong>Route Providers</strong> - Define providers at the route level for route-specific
+      services and dependencies.
+    </li>
+    <li>
+      <strong>ENVIRONMENT_INITIALIZER</strong> - Run setup scripts when modules initialize, useful
+      for configuration and initialization logic.
+    </li>
+    <li>
+      <strong>CLI Autocomplete</strong> - Enhanced command-line experience with improved
+      autocomplete for Angular CLI commands.
+    </li>
+    <li>
+      <strong>Angular DevTools</strong> - Improved debugging and profiling capabilities for Angular
+      applications.
+    </li>
+  </ul>
+</section>
+
+<section class="feature-showcase">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ injectDemoTitle }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        This component uses the <code>inject()</code> function instead of constructor injection:
+      </p>
+      <pre><code>private readonly titleService = inject(Title);
+private readonly dessertService = inject(DessertService);</code></pre>
+      <button type="button" mat-flat-button (click)="loadDesserts()">
+        Load Desserts (check console)
+      </button>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section class="feature-showcase">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ typedFormsTitle }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Typed forms provide compile-time type safety. Try modifying the form values below. The typed
+        form will catch type errors at compile time.
+      </p>
+
+      <h3>Untyped Form (Legacy)</h3>
+      <form [formGroup]="untypedForm">
+        <mat-form-field>
+          <mat-label>Text</mat-label>
+          <input matInput formControlName="text" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Number</mat-label>
+          <input matInput type="number" formControlName="number" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+        </mat-form-field>
+      </form>
+      <p><strong>Form Value:</strong></p>
+      <pre>{{ untypedForm.value | json }}</pre>
+
+      <h3>Typed Form (Angular 14+)</h3>
+      <form [formGroup]="typedForm">
+        <mat-form-field>
+          <mat-label>Text</mat-label>
+          <input matInput formControlName="text" />
+          @if (typedForm.controls.text.hasError('required')) {
+            <mat-error>Text is required</mat-error>
+          }
+          @if (typedForm.controls.text.hasError('minlength')) {
+            <mat-error>Text must be at least 3 characters</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Number</mat-label>
+          <input matInput type="number" formControlName="number" />
+          @if (typedForm.controls.number.hasError('required')) {
+            <mat-error>Number is required</mat-error>
+          }
+          @if (typedForm.controls.number.hasError('min')) {
+            <mat-error>Number must be at least 1</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          @if (typedForm.controls.email.hasError('required')) {
+            <mat-error>Email is required</mat-error>
+          }
+          @if (typedForm.controls.email.hasError('email')) {
+            <mat-error>Invalid email format</mat-error>
+          }
+        </mat-form-field>
+      </form>
+      <p><strong>Form Value:</strong></p>
+      <pre>{{ typedForm.value | json }}</pre>
+      <p><strong>Form Valid:</strong> {{ typedForm.valid }}</p>
+      <button type="button" mat-flat-button (click)="updateTypedForm()">
+        Set Valid Values
+      </button>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section class="feature-showcase">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Protected Members in Templates</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Angular 14 allows binding to protected class members directly in templates. This component
+        uses protected properties that are accessible in the template:
+      </p>
+      <ul>
+        <li><code>featureTitle</code>: {{ featureTitle }}</li>
+        <li><code>injectDemoTitle</code>: {{ injectDemoTitle }}</li>
+        <li><code>typedFormsTitle</code>: {{ typedFormsTitle }}</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section class="docs-links">
+  <h3>Angular 14 Documentation</h3>
+  <ul>
+    <li>
+      <a href="https://angular.dev/guide/components/importing" rel="noopener"
+        >Standalone Components Guide</a
+      >
+    </li>
+    <li>
+      <a href="https://angular.dev/reference/migrations/inject-function" rel="noopener"
+        >inject() Function Migration</a
+      >
+    </li>
+    <li>
+      <a href="https://angular.dev/guide/forms/typed-forms" rel="noopener">Typed Forms Guide</a>
+    </li>
+    <li>
+      <a href="https://blog.angular.dev/angular-v14-is-now-available-391a6db736af" rel="noopener"
+        >Angular v14 Release Blog</a
+      >
+    </li>
+  </ul>
+</section>
