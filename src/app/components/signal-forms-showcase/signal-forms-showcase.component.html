@@ -1,0 +1,208 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Signal Forms Showcase - Angular 21</mat-card-title>
+    <mat-card-subtitle
+      >10 fields with required, email, min/max, pattern, custom and async validation. Submit always
+      enabled; errors show on submit when invalid.</mat-card-subtitle
+    >
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (!formSubmitted()) {
+      <form novalidate (submit)="onSubmit($event)" class="form-container">
+        @if (submitAttempted() && signalShowcaseForm().invalid()) {
+          <div class="form-validation-summary" role="alert" aria-live="polite">
+            <strong>Please fix the errors below before submitting.</strong>
+          </div>
+        }
+
+        <!-- 1. userName with async validation -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            [field]="signalShowcaseForm.userName"
+            placeholder="Enter unique username"
+            autocomplete="username"
+          />
+          <mat-hint align="end"
+            >Min 3 characters. Async check: http://localhost:3000/checkUsername?username=… (run
+            <code>npm run start:json-server</code> to test).</mat-hint
+          >
+          @if (signalShowcaseForm.userName().pending()) {
+            <mat-hint class="checking">Checking availability...</mat-hint>
+          }
+          @if (signalShowcaseForm.userName().invalid() && (signalShowcaseForm.userName().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.userName().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 2. email -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            [field]="signalShowcaseForm.email"
+            placeholder="your@email.com"
+            autocomplete="email"
+          />
+          @if (signalShowcaseForm.email().invalid() && (signalShowcaseForm.email().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.email().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 3. password -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            [field]="signalShowcaseForm.password"
+            placeholder="8–32 chars, letter + number"
+            autocomplete="new-password"
+          />
+          @if (signalShowcaseForm.password().invalid() && (signalShowcaseForm.password().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.password().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 4. repeatPassword -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confirm password</mat-label>
+          <input
+            matInput
+            type="password"
+            [field]="signalShowcaseForm.repeatPassword"
+            placeholder="Repeat password"
+            autocomplete="new-password"
+          />
+          @if (signalShowcaseForm.repeatPassword().invalid() && (signalShowcaseForm.repeatPassword().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.repeatPassword().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 5. age -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Age</mat-label>
+          <input matInput type="number" [field]="signalShowcaseForm.age" placeholder="18–120" />
+          <mat-hint>Must be between 18 and 120</mat-hint>
+          @if (signalShowcaseForm.age().invalid() && (signalShowcaseForm.age().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.age().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 6. country -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Country</mat-label>
+          <mat-select [field]="signalShowcaseForm.country" placeholder="Select your country">
+            @for (country of countries; track country) {
+              <mat-option [value]="country">{{ country }}</mat-option>
+            }
+          </mat-select>
+          @if (signalShowcaseForm.country().invalid() && (signalShowcaseForm.country().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.country().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 7. phone -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Phone</mat-label>
+          <input
+            matInput
+            type="tel"
+            [field]="signalShowcaseForm.phone"
+            placeholder="e.g. (555) 123-4567"
+            autocomplete="tel"
+          />
+          <mat-hint>At least 10 digits; spaces, dashes, parentheses allowed</mat-hint>
+          @if (signalShowcaseForm.phone().invalid() && (signalShowcaseForm.phone().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.phone().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 8. birthDate -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Birth date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [field]="signalShowcaseForm.birthDate"
+            placeholder="MM/DD/YYYY"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-hint>Must be a date in the past</mat-hint>
+          @if (signalShowcaseForm.birthDate().invalid() && (signalShowcaseForm.birthDate().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.birthDate().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 9. bio -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Bio</mat-label>
+          <textarea
+            matInput
+            [field]="signalShowcaseForm.bio"
+            rows="4"
+            placeholder="Tell us about yourself (10–100 words)"
+          ></textarea>
+          <mat-hint>10 to 100 words required</mat-hint>
+          @if (signalShowcaseForm.bio().invalid() && (signalShowcaseForm.bio().touched() || submitAttempted())) {
+            @for (err of signalShowcaseForm.bio().errors(); track err) {
+              <mat-error>{{ err.message }}</mat-error>
+            }
+          }
+        </mat-form-field>
+
+        <!-- 10. termsAccepted -->
+        <div class="checkbox-container">
+          <mat-checkbox [field]="signalShowcaseForm.termsAccepted">
+            I accept the terms and conditions
+          </mat-checkbox>
+          @if (signalShowcaseForm.termsAccepted().invalid() && (signalShowcaseForm.termsAccepted().touched() || submitAttempted())) {
+            <div class="checkbox-error" role="alert">
+              You must accept the terms and conditions
+            </div>
+          }
+        </div>
+
+        <!-- Form actions: Submit is always enabled -->
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button type="button" (click)="onReset()">Reset</button>
+        </div>
+
+        <div class="form-status mat-bg-primary-container mat-elevation-z2">
+          <p><strong>Form status:</strong> {{ signalShowcaseForm().valid() ? 'Valid' : 'Invalid' }}</p>
+          <p><strong>Form touched:</strong> {{ signalShowcaseForm().touched() ? 'Yes' : 'No' }}</p>
+        </div>
+      </form>
+    } @else {
+      <div class="success-container">
+        <h2>Form submitted successfully</h2>
+        <div class="submitted-data">
+          <h3>Submitted data</h3>
+          <pre>{{ formData() | json }}</pre>
+        </div>
+        <button mat-raised-button color="accent" (click)="onReset()">Submit another form</button>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

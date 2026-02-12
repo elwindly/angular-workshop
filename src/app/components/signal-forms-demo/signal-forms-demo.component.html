@@ -6,7 +6,7 @@
 
   <mat-card-content>
     @if (!formSubmitted()) {
-      <form (submit)="onSubmit()" class="form-container">
+      <form novalidate (submit)="onSubmit($event)" class="form-container">
         <!-- 1. Username with async validation -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Username</mat-label>

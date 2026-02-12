@@ -2,21 +2,53 @@
 
 <ul class="main-list">
   <li>
-    Stabilized Signal-based APIs: toSignal(), toObservable(), and linkedSignal() now stable and
-    production-ready
+    Stabilized Signal-based APIs: effect(), toSignal(), toObservable(), and linkedSignal() now
+    stable and production-ready
   </li>
   <li>
     Control Flow Syntax: Stabilized @'if', @'for', @'switch', @'case', and @'let' for cleaner
-    templates (ngIf/ngFor/ngSwitch deprecated)
+    templates; *ngIf, *ngFor, *ngSwitch deprecated (removal in v22)
   </li>
   <li>
     Zoneless Change Detection: Moved to developer preview with improved performance without Zone.js
     20.2 production ready
   </li>
+  <li>
+    Resource API (experimental): resource() and httpResource() for signal-based async state and HTTP
+    requests with automatic cancellation and reactive params
+  </li>
+  <li>
+    SSR: Incremental hydration and route-level render mode (ServerRoute,
+    RenderMode.Server/Client/Prerender, getPrerenderParams()) promoted to stable
+  </li>
   <li>Experimental MCP server to help with LLM codegen</li>
   <li>
     Template Expression Improvements: Support for exponentiation operator (**), in keyword, void
     operator, and tagged template literals in expressions
+  </li>
+  <li>
+    Chrome DevTools: Angular-specific track in the Performance panel (ng.enableProfiling()) for
+    component rendering and change detection visibility
+  </li>
+  <li>
+    Angular DevTools: Route visualization, signal graph, and defer block / incremental hydration
+    inspection
+  </li>
+  <li>
+    Extended diagnostics: Invalid nullish coalescing, missing structural directive imports, and
+    uninvoked track function in @'for'
+  </li>
+  <li>
+    Style guide and CLI: Optional filename and class name suffixes; new projects omit .component,
+    .service, etc. by default
+  </li>
+  <li>
+    Host bindings: Type checking and language service for the host object in component metadata
+    (typeCheckHostBindings in tsconfig; default in v21)
+  </li>
+  <li>
+    GenAI: llms.txt for LLM discovery and angular.dev/ai guides and videos for building GenAI
+    applications
   </li>
   <li>
     CDK Drag&Drop improvement to allow copying items between lists
@@ -35,10 +67,13 @@
   <li>
     Forms Improvements: markAllAsDirty method added, ability to reset forms without emitting events
   </li>
-  <li>Route visualization and signal graph in Angular DevTools</li>
   <li>
     Animations: New animation APIs for more dynamic and flexible animations
     <a href="https://angular.dev/guide/animations/css" target="_blank">Link to the official page</a>
+  </li>
+  <li>
+    Experimental Vitest support in Angular CLI (watch mode and browser testing); promoted to stable
+    default in v21
   </li>
 </ul>
 

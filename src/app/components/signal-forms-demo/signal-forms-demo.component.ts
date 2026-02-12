@@ -1,5 +1,5 @@
-import { JsonPipe } from "@angular/common";
-import { ChangeDetectionStrategy, Component, signal } from "@angular/core";
+import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   ValidationErrors,
   Validators,
-} from "@angular/forms";
+} from '@angular/forms';
 import {
   email,
   Field,
@@ -17,18 +17,19 @@ import {
   min,
   minLength,
   required,
+  submit,
   validate,
   validateHttp,
-} from "@angular/forms/signals";
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatNativeDateModule } from "@angular/material/core";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatSelectModule } from "@angular/material/select";
-import { delay, map, Observable, of } from "rxjs";
+} from '@angular/forms/signals';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { delay, map, Observable, of } from 'rxjs';
 
 export interface UserFormData {
   username: string;
@@ -41,7 +42,7 @@ export interface UserFormData {
 }
 
 @Component({
-  selector: "app-signal-forms-demo",
+  selector: 'app-signal-forms-demo',
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -55,8 +56,8 @@ export interface UserFormData {
     JsonPipe,
     Field,
   ],
-  templateUrl: "./signal-forms-demo.component.html",
-  styleUrl: "./signal-forms-demo.component.scss",
+  templateUrl: './signal-forms-demo.component.html',
+  styleUrl: './signal-forms-demo.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsDemoComponent {
@@ -64,24 +65,24 @@ export class SignalFormsDemoComponent {
   formSubmitted = signal(false);
   formData = signal<UserFormData | null>(null);
   userFormModel = signal<UserFormData>({
-    username: "",
-    email: "",
+    username: '',
+    email: '',
     age: 0,
     country: null,
-    bio: "",
+    bio: '',
     birthDate: null,
     termsAccepted: null,
   });
 
   signalUserForm = form(this.userFormModel, (schemaPath) => {
     // 1. Username - required, min/max length, async validation for uniqueness
-    required(schemaPath.username, { message: "Username is required" });
+    required(schemaPath.username, { message: 'Username is required' });
     minLength(schemaPath.username, 3, {
-      message: "Username must be at least 3 characters",
+      message: 'Username must be at least 3 characters',
     });
 
     maxLength(schemaPath.username, 20, {
-      message: "Username cannot exceed 20 characters",
+      message: 'Username cannot exceed 20 characters',
     });
     // Async validator for username uniqueness
     validateHttp(schemaPath.username, {
@@ -92,36 +93,36 @@ export class SignalFormsDemoComponent {
       },
       onSuccess: () => {
         // Simulate checking against existing usernames
-        const existingUsernames = ["admin", "user", "test", "demo"];
+        const existingUsernames = ['admin', 'user', 'test', 'demo'];
         const username = this.userFormModel().username?.toLowerCase();
         if (username && existingUsernames.includes(username)) {
           return {
-            kind: "usernameTaken",
-            message: "Username is already taken",
+            kind: 'usernameTaken',
+            message: 'Username is already taken',
           };
         }
         return null;
       },
       onError: () => ({
-        kind: "networkError",
-        message: "Could not verify username availability",
+        kind: 'networkError',
+        message: 'Could not verify username availability',
       }),
     });
 
     // 2. Email - required, email pattern
-    required(schemaPath.email, { message: "Email is required" });
-    email(schemaPath.email, { message: "Invalid email format" });
+    required(schemaPath.email, { message: 'Email is required' });
+    email(schemaPath.email, { message: 'Invalid email format' });
 
     // 3. Age - required, min/max range
-    required(schemaPath.age, { message: "Age is required" });
-    min(schemaPath.age, 18, { message: "Must be at least 18 years old" });
-    max(schemaPath.age, 120, { message: "Please enter a valid age" });
+    required(schemaPath.age, { message: 'Age is required' });
+    min(schemaPath.age, 18, { message: 'Must be at least 18 years old' });
+    max(schemaPath.age, 120, { message: 'Please enter a valid age' });
 
     // 4. Country - required select
-    required(schemaPath.country, { message: "Country is required" });
+    required(schemaPath.country, { message: 'Country is required' });
 
     // 5. Bio - required, custom validator for word count
-    required(schemaPath.bio, { message: "Bio is required" });
+    required(schemaPath.bio, { message: 'Bio is required' });
     validate(schemaPath.bio, ({ value }) => {
       const text = value();
       if (!text) return null;
@@ -134,13 +135,13 @@ export class SignalFormsDemoComponent {
 
       if (wordCount < 10) {
         return {
-          kind: "minWords",
+          kind: 'minWords',
           message: `Minimum 10 words required (current: ${wordCount})`,
         };
       }
       if (wordCount > 100) {
         return {
-          kind: "maxWords",
+          kind: 'maxWords',
           message: `Maximum 100 words allowed (current: ${wordCount})`,
         };
       }
@@ -148,7 +149,7 @@ export class SignalFormsDemoComponent {
     });
 
     // 6. Birth date - required, custom validator for date in past
-    required(schemaPath.birthDate, { message: "Birth date is required" });
+    required(schemaPath.birthDate, { message: 'Birth date is required' });
     validate(schemaPath.birthDate, ({ value }) => {
       const selectedDate = value();
       if (!selectedDate) return null;
@@ -159,8 +160,8 @@ export class SignalFormsDemoComponent {
 
       if (date >= today) {
         return {
-          kind: "futureDate",
-          message: "Birth date must be in the past",
+          kind: 'futureDate',
+          message: 'Birth date must be in the past',
         };
       }
       return null;
@@ -170,8 +171,8 @@ export class SignalFormsDemoComponent {
     validate(schemaPath.termsAccepted, ({ value }) => {
       if (!value()) {
         return {
-          kind: "required",
-          message: "You must accept the terms and conditions",
+          kind: 'required',
+          message: 'You must accept the terms and conditions',
         };
       }
       return null;
@@ -181,13 +182,13 @@ export class SignalFormsDemoComponent {
   // Define the form using signal-based FormControl/FormGroup
   userForm = new FormGroup({
     // 1. Username - required, min length, async validation for uniqueness
-    username: new FormControl("", {
+    username: new FormControl('', {
       validators: [Validators.required, Validators.minLength(3), Validators.maxLength(20)],
       asyncValidators: [this.usernameAsyncValidator.bind(this)],
     }),
 
     // 2. Email - required, email pattern
-    email: new FormControl("", [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
 
     // 3. Age - required, min/max range
     age: new FormControl<number | null>(null, [
@@ -197,10 +198,10 @@ export class SignalFormsDemoComponent {
     ]),
 
     // 4. Country - required select
-    country: new FormControl("", Validators.required),
+    country: new FormControl('', Validators.required),
 
     // 5. Bio - required, custom validator for word count
-    bio: new FormControl("", [Validators.required, this.wordCountValidator(10, 100)]),
+    bio: new FormControl('', [Validators.required, this.wordCountValidator(10, 100)]),
 
     // 6. Birth date - required, custom validator for date in past
     birthDate: new FormControl<Date | null>(null, [Validators.required, this.pastDateValidator()]),
@@ -210,13 +211,13 @@ export class SignalFormsDemoComponent {
   });
 
   countries = [
-    "United States",
-    "Canada",
-    "United Kingdom",
-    "Germany",
-    "France",
-    "Japan",
-    "Australia",
+    'United States',
+    'Canada',
+    'United Kingdom',
+    'Germany',
+    'France',
+    'Japan',
+    'Australia',
   ];
 
   // Async validator simulating username uniqueness check
@@ -226,7 +227,7 @@ export class SignalFormsDemoComponent {
     }
 
     // Simulate API call with 1 second delay
-    const existingUsernames = ["admin", "user", "test", "demo"];
+    const existingUsernames = ['admin', 'user', 'test', 'demo'];
 
     return of(control.value).pipe(
       delay(1000),
@@ -276,14 +277,24 @@ export class SignalFormsDemoComponent {
     };
   }
 
-  onSubmit(): void {
-    if (!this.userForm.valid) {
-      this.userForm.markAllAsTouched();
-    }
+  onSubmit(event: Event): void {
+    event.preventDefault();
+    submit(this.signalUserForm, async () => {
+      this.formData.set({ ...this.userFormModel() });
+      this.formSubmitted.set(true);
+    });
   }
 
   onReset(): void {
-    this.userForm.reset();
+    this.userFormModel.set({
+      username: '',
+      email: '',
+      age: 0,
+      country: null,
+      bio: '',
+      birthDate: null,
+      termsAccepted: null,
+    });
     this.formSubmitted.set(false);
     this.formData.set(null);
   }
