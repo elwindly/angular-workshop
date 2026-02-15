@@ -1,0 +1,11 @@
+---
+description: Always respect ESLint rules in this project
+alwaysApply: true
+---
+
+# Respect ESLint Rules
+
+- **Always follow** the project's ESLint configuration (`eslint.config.js`).
+- **Fix** any ESLint errors or warnings introduced by code changes.
+- **Run** `ng lint` or `npx eslint .` when unsure; resolve reported issues before considering the task done.
+- **Do not** disable or weaken rules without a documented justification; prefer fixing the code to satisfy the rule.
