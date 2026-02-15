@@ -1,0 +1,121 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Signal Forms Advanced Showcase</mat-card-title>
+    <mat-card-subtitle>
+      Custom control, array of items with count validation, and a discount type field that appears
+      only when there are at least 5 items.
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (!formSubmitted()) {
+      <form novalidate (submit)="onSubmit($event)" class="form-container">
+        @if (submitAttempted() && advancedForm().invalid()) {
+          <div class="form-validation-summary" role="alert" aria-live="polite">
+            <strong>Please fix the errors below before submitting.</strong>
+          </div>
+        }
+
+        <!-- Custom control: special code (not wrapped in mat-form-field; it does not implement MatFormFieldControl) -->
+        <div class="custom-control-wrapper full-width">
+          <span class="custom-control-label">Special code</span>
+          <app-custom-value-control
+            [field]="advancedForm.specialCode"
+            [showErrors]="submitAttempted()"
+            label="Special code"
+          />
+          <span class="custom-control-hint">Custom control implementing FormValueControl</span>
+        </div>
+
+        <!-- Array of items -->
+        <div class="items-section">
+          <h4 class="items-heading">Items (min 1, max 10)</h4>
+          @if (advancedForm.items().invalid() && (advancedForm.items().touched() || submitAttempted())) {
+            <div class="array-errors" role="alert">
+              @for (err of advancedForm.items().errors(); track err.kind) {
+                <span class="error-message">{{ err.message }}</span>
+              }
+            </div>
+          }
+          <div class="items-list">
+            @if (advancedModel().items.length === 0) {
+              <p class="empty">No items yet — add one.</p>
+            }
+            @for (item of advancedModel().items; track $index) {
+              <div class="row">
+                <mat-form-field appearance="outline" class="item-field">
+                  <mat-label>Item {{ $index + 1 }}</mat-label>
+                  <input
+                    matInput
+                    [field]="advancedForm.items[$index].label"
+                    placeholder="Enter item label"
+                  />
+                  @if (advancedForm.items[$index].label().invalid() && (advancedForm.items[$index].label().touched() || submitAttempted())) {
+                    @for (err of advancedForm.items[$index].label().errors(); track err.kind) {
+                      <mat-error>{{ err.message }}</mat-error>
+                    }
+                  }
+                </mat-form-field>
+                <button
+                  type="button"
+                  mat-button
+                  color="warn"
+                  (click)="removeItem($index)"
+                  [attr.aria-label]="'Remove item ' + ($index + 1)"
+                >
+                  Remove
+                </button>
+              </div>
+            }
+          </div>
+          <div class="items-actions">
+            <button type="button" mat-raised-button color="primary" (click)="addItem()">
+              Add item
+            </button>
+          </div>
+        </div>
+
+        <!-- Discount type (hidden until >= 5 items) -->
+        @if (!advancedForm.discountType().hidden()) {
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Discount type</mat-label>
+            <mat-select
+              [field]="advancedForm.discountType"
+              placeholder="Select discount"
+              aria-label="Discount type"
+            >
+              @for (opt of discountTypes; track opt.value) {
+                <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
+              }
+            </mat-select>
+            <mat-hint>Unlocked when you have 5 or more items</mat-hint>
+            @if (advancedForm.discountType().invalid() && (advancedForm.discountType().touched() || submitAttempted())) {
+              @for (err of advancedForm.discountType().errors(); track err.kind) {
+                <mat-error>{{ err.message }}</mat-error>
+              }
+            }
+          </mat-form-field>
+        }
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button type="button" (click)="onReset()">Reset</button>
+        </div>
+
+        <div class="form-status mat-bg-primary-container mat-elevation-z2">
+          <p><strong>Form status:</strong> {{ advancedForm().valid() ? 'Valid' : 'Invalid' }}</p>
+          <p><strong>Items count:</strong> {{ advancedModel().items.length }}</p>
+        </div>
+      </form>
+    } @else {
+      <div class="success-container">
+        <h2>Form submitted successfully</h2>
+        <div class="submitted-data">
+          <h3>Submitted data</h3>
+          <pre>{{ formData() | json }}</pre>
+        </div>
+        <button mat-raised-button color="accent" (click)="onReset()">Submit another form</button>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

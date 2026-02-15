@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { AriaShowcaseComponent } from '../../components/aria-showcase/aria-showcase.component';
 import { FormArrayDirectiveDemoComponent } from '../../components/form-array-directive/form-array-directive-demo.component';
+import { SignalFormsAdvancedShowcaseComponent } from '../../components/signal-forms-advanced-showcase/signal-forms-advanced-showcase.component';
 import { SignalFormsShowcaseComponent } from '../../components/signal-forms-showcase/signal-forms-showcase.component';
 import { ToastService } from '../../services/toast.service';
 
@@ -10,6 +11,7 @@ import { ToastService } from '../../services/toast.service';
   imports: [
     MatButtonModule,
     SignalFormsShowcaseComponent,
+    SignalFormsAdvancedShowcaseComponent,
     FormArrayDirectiveDemoComponent,
     AriaShowcaseComponent,
   ],
@@ -21,11 +23,11 @@ export class Angular21Component {
   protected readonly toast = inject(ToastService);
 
   protected showInfo(): void {
-    this.toast.info('This is an info message.');
+    this.toast.info('This is an info message.', { durationMs: 3000 });
   }
 
   protected showSuccess(): void {
-    this.toast.success('Action completed successfully.');
+    this.toast.success('Action completed successfully.', { durationMs: 3000 });
   }
 
   protected showWarning(): void {

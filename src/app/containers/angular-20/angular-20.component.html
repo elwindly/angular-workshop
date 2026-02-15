@@ -1,81 +1,161 @@
 <h2>Angular 20 new features 2025 MAY 26</h2>
 
-<ul class="main-list">
-  <li>
-    Stabilized Signal-based APIs: effect(), toSignal(), toObservable(), and linkedSignal() now
-    stable and production-ready
-  </li>
-  <li>
-    Control Flow Syntax: Stabilized @'if', @'for', @'switch', @'case', and @'let' for cleaner
-    templates; *ngIf, *ngFor, *ngSwitch deprecated (removal in v22)
-  </li>
-  <li>
-    Zoneless Change Detection: Moved to developer preview with improved performance without Zone.js
-    20.2 production ready
-  </li>
-  <li>
-    Resource API (experimental): resource() and httpResource() for signal-based async state and HTTP
-    requests with automatic cancellation and reactive params
-  </li>
-  <li>
-    SSR: Incremental hydration and route-level render mode (ServerRoute,
-    RenderMode.Server/Client/Prerender, getPrerenderParams()) promoted to stable
-  </li>
-  <li>Experimental MCP server to help with LLM codegen</li>
-  <li>
-    Template Expression Improvements: Support for exponentiation operator (**), in keyword, void
-    operator, and tagged template literals in expressions
-  </li>
-  <li>
-    Chrome DevTools: Angular-specific track in the Performance panel (ng.enableProfiling()) for
-    component rendering and change detection visibility
-  </li>
-  <li>
-    Angular DevTools: Route visualization, signal graph, and defer block / incremental hydration
-    inspection
-  </li>
-  <li>
-    Extended diagnostics: Invalid nullish coalescing, missing structural directive imports, and
-    uninvoked track function in @'for'
-  </li>
-  <li>
-    Style guide and CLI: Optional filename and class name suffixes; new projects omit .component,
-    .service, etc. by default
-  </li>
-  <li>
-    Host bindings: Type checking and language service for the host object in component metadata
-    (typeCheckHostBindings in tsconfig; default in v21)
-  </li>
-  <li>
-    GenAI: llms.txt for LLM discovery and angular.dev/ai guides and videos for building GenAI
-    applications
-  </li>
-  <li>
-    CDK Drag&Drop improvement to allow copying items between lists
-    <a href="https://angular.dev/guide/drag-drop#copying-items-between-lists" target="_blank"
-      >Link to the official page</a
-    >
-  </li>
-  <li>
-    Dynamic Component Features: Add input binding support, two-way bindings, and directives on
-    dynamically-created components
-  </li>
-  <li>
-    Router Enhancements: Asynchronous redirects support, ability to directly abort navigation,
-    improved type safety on route guards
-  </li>
-  <li>
-    Forms Improvements: markAllAsDirty method added, ability to reset forms without emitting events
-  </li>
-  <li>
-    Animations: New animation APIs for more dynamic and flexible animations
-    <a href="https://angular.dev/guide/animations/css" target="_blank">Link to the official page</a>
-  </li>
-  <li>
-    Experimental Vitest support in Angular CLI (watch mode and browser testing); promoted to stable
-    default in v21
-  </li>
-</ul>
+<div class="feature-categories">
+  <section class="feature-category">
+    <h3>Signals</h3>
+    <ul class="main-list">
+      <li>
+        Stabilized Signal-based APIs: effect(), toSignal(), toObservable(), and linkedSignal() now
+        stable and production-ready
+      </li>
+      <li>
+        Resource API (experimental): resource() and httpResource() for signal-based async state and
+        HTTP requests with automatic cancellation and reactive params
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>Template &amp; control flow</h3>
+    <ul class="main-list">
+      <li>
+        Control Flow Syntax: Stabilized @'if', @'for', @'switch', @'case', and @'let' for cleaner
+        templates; *ngIf, *ngFor, *ngSwitch deprecated (removal in v22)
+      </li>
+      <li>
+        Template Expression Improvements: Support for exponentiation operator (**), in keyword, void
+        operator, and tagged template literals in expressions
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>Change detection &amp; zoneless</h3>
+    <ul class="main-list">
+      <li>
+        Zoneless Change Detection: Moved to developer preview with improved performance without
+        Zone.js 20.2 production ready
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>SSR</h3>
+    <ul class="main-list">
+      <li>
+        Incremental hydration and route-level render mode (ServerRoute,
+        RenderMode.Server/Client/Prerender, getPrerenderParams()) promoted to stable
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>Tooling &amp; DevTools</h3>
+    <ul class="main-list">
+      <li>Experimental MCP server to help with LLM codegen</li>
+      <li>
+        Chrome DevTools: Angular-specific track in the Performance panel (ng.enableProfiling()) for
+        component rendering and change detection visibility
+      </li>
+      <li>
+        Angular DevTools: Route visualization, signal graph, and defer block / incremental hydration
+        inspection
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>Compiler &amp; diagnostics</h3>
+    <ul class="main-list">
+      <li>
+        Extended diagnostics: Invalid nullish coalescing, missing structural directive imports, and
+        uninvoked track function in @'for'
+      </li>
+      <li>
+        Host bindings: Type checking and language service for the host object in component metadata
+        (typeCheckHostBindings in tsconfig; default in v21)
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>CLI &amp; style guide</h3>
+    <ul class="main-list">
+      <li>
+        Style guide and CLI: Optional filename and class name suffixes; new projects omit
+        .component, .service, etc. by default
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>GenAI &amp; docs</h3>
+    <ul class="main-list">
+      <li>
+        GenAI: llms.txt for LLM discovery and angular.dev/ai guides and videos for building GenAI
+        applications
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>CDK &amp; components</h3>
+    <ul class="main-list">
+      <li>
+        CDK Drag&Drop improvement to allow copying items between lists
+        <a href="https://angular.dev/guide/drag-drop#copying-items-between-lists" target="_blank"
+          >Link to the official page</a
+        >
+      </li>
+      <li>
+        Dynamic Component Features: Add input binding support, two-way bindings, and directives on
+        dynamically-created components
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>Router</h3>
+    <ul class="main-list">
+      <li>
+        Router Enhancements: Asynchronous redirects support, ability to directly abort navigation,
+        improved type safety on route guards
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>Forms</h3>
+    <ul class="main-list">
+      <li>
+        Forms Improvements: markAllAsDirty method added, ability to reset forms without emitting
+        events
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>Animations</h3>
+    <ul class="main-list">
+      <li>
+        Animations: New animation APIs for more dynamic and flexible animations
+        <a href="https://angular.dev/guide/animations/css" target="_blank"
+          >Link to the official page</a
+        >
+      </li>
+    </ul>
+  </section>
+
+  <section class="feature-category">
+    <h3>Testing</h3>
+    <ul class="main-list">
+      <li>
+        Experimental Vitest support in Angular CLI (watch mode and browser testing); promoted to
+        stable default in v21
+      </li>
+    </ul>
+  </section>
+</div>
 
 <h3>Posts from JSONPlaceholder API</h3>
 <ul>
@@ -90,7 +170,7 @@
 <h3>Dynamic component goes here</h3>
 <div id="container"></div>
 <ng-container #container />
-<button type="button" mat-flat-button (click)="showWarning2()" class="btn ml-2">
+<button type="button" mat-flat-button (click)="showWarning()" class="btn ml-2">
   Add warning component
 </button>
 

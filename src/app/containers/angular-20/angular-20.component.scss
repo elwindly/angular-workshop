@@ -3,6 +3,22 @@
   padding: 2rem;
 }
 
+.feature-categories {
+  .feature-category {
+    margin-bottom: 1.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
+}
+
 .action-container {
   display: flex;
   gap: 1rem;

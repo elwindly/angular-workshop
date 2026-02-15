@@ -1,89 +1,205 @@
 <section class="feature-list">
   <h2>Angular 21 highlights 2025 — v21.0.0</h2>
 
-  <ul class="main-list">
-    <li>
-      Zoneless by default: new apps no longer include Zone.js; migration support and
-      provideZonelessChangeDetection()
-    </li>
-    <li>
-      Vitest as the new default, stable test runner
-      <code>ng g @schematics/angular:refactor-jasmine-vitest</code>
-    </li>
-    <li>Signal-based forms: experimental signal forms and new <code>debounce()</code> rule</li>
-    <li>
-      Angular Aria (<code>@angular/aria</code>): developer preview — headless, accessible UI
-      patterns (Accordion, Combobox, Grid, Listbox, Menu, Tabs, Toolbar, Tree); signal-based and
-      fully stylable
-      <a href="https://angular.dev/guide/aria" target="_blank" rel="noopener">Official guide</a>
-    </li>
-    <li>
-      MCP server stable: seven tools for AI agents (best practices, search_documentation,
-      find_examples, onpush_zoneless_migration, modernize, ai_tutor, list_projects)
-    </li>
-    <li>
-      Zoneless by default migration support and improvements for server bootstrapping
-      (BootstrapContext)
-    </li>
-    <li>
-      Control flow and template improvements: better typing, regular expressions in template
-      expressions (e.g. with <code>&#64;let</code>), improved <code>&#64;for</code> reactivity
-    </li>
-    <li>
-      Enhanced compiler checks: host binding type-checking enabled by default and new diagnostics
-    </li>
-    <li>
-      Forms UX improvements: FormArrayDirective, better interop between signal forms and reactive
-      forms
-    </li>
-    <li>
-      Router: lastSuccessfulNavigation as a signal; various router memory and fix improvements
-    </li>
-    <li>
-      Tooling/migrations: new migrations for control flow, ngClass/ngStyle to class/style bindings,
-      standalone support, RouterTestingModule migration
-    </li>
-    <li>
-      Template and API polish: SimpleChanges now generic; KeyValue pipe supports objects with
-      optional keys; customizable <code>&#64;defer</code> viewport options (e.g. rootMargin for on
-      viewport)
-    </li>
-    <li>
-      Enter/leave animations: new animate.enter and animate.leave APIs for DOM insertion and removal
-      <a href="https://angular.dev/guide/animations" target="_blank" rel="noopener"
-        >Animations guide</a
-      >
-    </li>
-    <li>
-      DevTools: built-in Signals formatter (enable custom formatters in Chrome/Firefox); Transfer
-      State tab for SSR inspection
-    </li>
-    <li>CDK overlays can use the browser’s native Popover API for improved accessibility</li>
-    <li>
-      angular.dev/ai: dedicated docs, prompts, and rules for building AI-powered applications with
-      Angular
-    </li>
-    <li>Compatibility: minimum TypeScript 5.9 (no older); Node ^20.19.0 || ^22.12.0 || ^24.0.0</li>
-    <li>
-      Tailwind CSS integration: improved support and official guidelines for using Tailwind CSS with
-      Angular
-      <a href="https://angular.dev/guide/tailwind" target="_blank" rel="noopener">Official guide</a>
-    </li>
-    <li>
-      Theming improvements: new CSS variables, Material system token utility classes, and better
-      integration with Material
-      <a
-        href="https://material.angular.dev/guide/theming-your-components"
-        target="_blank"
-        rel="noopener"
-        >Official guide</a
-      >
-    </li>
-  </ul>
+  <div class="feature-categories">
+    <section class="feature-category">
+      <h3>Zoneless &amp; change detection</h3>
+      <ul class="main-list">
+        <li>
+          Zoneless by default: new apps no longer include Zone.js; migration support and
+          provideZonelessChangeDetection()
+        </li>
+        <li>
+          Zoneless by default migration support and improvements for server bootstrapping
+          (BootstrapContext)
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Testing</h3>
+      <ul class="main-list">
+        <li>
+          Vitest as the new default, stable test runner
+          <code>ng g @schematics/angular:refactor-jasmine-vitest</code>
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Signals &amp; forms</h3>
+      <ul class="main-list">
+        <li>Signal-based forms: experimental signal forms and new <code>debounce()</code> rule</li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Accessibility (Angular Aria)</h3>
+      <ul class="main-list">
+        <li>
+          Angular Aria (<code>@angular/aria</code>): developer preview — headless, accessible UI
+          patterns (Accordion, Combobox, Grid, Listbox, Menu, Tabs, Toolbar, Tree); signal-based and
+          fully stylable
+          <a href="https://angular.dev/guide/aria" target="_blank" rel="noopener">Official guide</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Tooling &amp; MCP</h3>
+      <ul class="main-list">
+        <li>
+          MCP server stable: seven tools for AI agents (best practices, search_documentation,
+          find_examples, onpush_zoneless_migration, modernize, ai_tutor, list_projects)
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Template &amp; control flow</h3>
+      <ul class="main-list">
+        <li>
+          Control flow and template improvements: better typing, regular expressions in template
+          expressions (e.g. with <code>&#64;let</code>), improved <code>&#64;for</code> reactivity
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Compiler &amp; diagnostics</h3>
+      <ul class="main-list">
+        <li>
+          Enhanced compiler checks: host binding type-checking enabled by default and new
+          diagnostics
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Forms</h3>
+      <ul class="main-list">
+        <li>
+          Forms UX improvements: FormArrayDirective, better interop between signal forms and
+          reactive forms
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Router</h3>
+      <ul class="main-list">
+        <li>
+          Router: lastSuccessfulNavigation as a signal; various router memory and fix improvements
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Migrations &amp; tooling</h3>
+      <ul class="main-list">
+        <li>
+          Tooling/migrations: new migrations for control flow, ngClass/ngStyle to class/style
+          bindings, standalone support, RouterTestingModule migration
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Template &amp; API polish</h3>
+      <ul class="main-list">
+        <li>
+          Template and API polish: SimpleChanges now generic; KeyValue pipe supports objects with
+          optional keys; customizable <code>&#64;defer</code> viewport options (e.g. rootMargin for
+          on viewport)
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Animations</h3>
+      <ul class="main-list">
+        <li>
+          Enter/leave animations: new animate.enter and animate.leave APIs for DOM insertion and
+          removal
+          <a href="https://angular.dev/guide/animations" target="_blank" rel="noopener"
+            >Animations guide</a
+          >
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>DevTools</h3>
+      <ul class="main-list">
+        <li>
+          DevTools: built-in Signals formatter (enable custom formatters in Chrome/Firefox);
+          Transfer State tab for SSR inspection
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>CDK</h3>
+      <ul class="main-list">
+        <li>CDK overlays can use the browser's native Popover API for improved accessibility</li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Docs &amp; GenAI</h3>
+      <ul class="main-list">
+        <li>
+          angular.dev/ai: dedicated docs, prompts, and rules for building AI-powered applications
+          with Angular
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Compatibility</h3>
+      <ul class="main-list">
+        <li>
+          Compatibility: minimum TypeScript 5.9 (no older); Node ^20.19.0 || ^22.12.0 || ^24.0.0
+        </li>
+      </ul>
+    </section>
+
+    <section class="feature-category">
+      <h3>Styling</h3>
+      <ul class="main-list">
+        <li>
+          Tailwind CSS integration: improved support and official guidelines for using Tailwind CSS
+          with Angular
+          <a href="https://angular.dev/guide/tailwind" target="_blank" rel="noopener"
+            >Official guide</a
+          >
+        </li>
+        <li>
+          Theming improvements: new CSS variables, Material system token utility classes, and better
+          integration with Material
+          <a
+            href="https://material.angular.dev/guide/theming-your-components"
+            target="_blank"
+            rel="noopener"
+            >Official guide</a
+          >
+        </li>
+      </ul>
+    </section>
+  </div>
 </section>
 
 <section class="feature-showcase">
   <app-signal-forms-showcase />
+</section>
+
+<section class="feature-showcase">
+  <h3>Signal Forms Advanced</h3>
+  <p>
+    Custom FormValueControl, array of items with min/max length validation, and a discount type
+    field that only appears when there are at least 5 items.
+  </p>
+  <app-signal-forms-advanced-showcase />
 </section>
 
 <section class="feature-showcase">
