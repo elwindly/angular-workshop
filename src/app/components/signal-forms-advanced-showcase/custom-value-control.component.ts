@@ -13,8 +13,8 @@ interface ValidationError {
       [value]="value()"
       (input)="onInput($event)"
       (blur)="onBlur()"
-      [attr.aria-invalid]="invalid()"
-      [attr.aria-describedby]="invalid() ? errorId : null"
+      [attr.aria-invalid]="invalid() && (touched() || showErrors())"
+      [attr.aria-describedby]="invalid() && (touched() || showErrors()) ? errorId : null"
       [attr.aria-label]="label()"
     />
     @if (invalid() && (touched() || showErrors())) {
