@@ -2,12 +2,12 @@
   @for (toast of toastService.messages(); track toast.id) {
     <div
       class="toast toast--{{ toast.variant }}"
-      [attr.role]="getVariantRole(toast.variant)"
-      [attr.aria-live]="getVariantAriaLive(toast.variant)"
+      [attr.role]="variantRole[toast.variant]"
+      [attr.aria-live]="variantAriaLive[toast.variant]"
       [attr.aria-atomic]="true"
     >
       <span class="toast__icon" aria-hidden="true">
-        <mat-icon>{{ getIconName(toast.variant) }}</mat-icon>
+        <mat-icon>{{ variantIcon[toast.variant] }}</mat-icon>
       </span>
       <p class="toast__message" id="toast-msg-{{ toast.id }}">
         {{ toast.message }}
