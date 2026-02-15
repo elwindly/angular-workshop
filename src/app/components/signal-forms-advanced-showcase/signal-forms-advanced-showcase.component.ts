@@ -9,6 +9,7 @@ import {
   minLength,
   required,
   submit,
+  validateTree,
 } from '@angular/forms/signals';
 import type { SchemaPathTree } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { uniqueItemLabelsValidator } from '../../utils/unique-item-labels.validator';
 import { CustomValueControlComponent } from './custom-value-control.component';
 
 export interface AdvancedFormItem {
@@ -73,6 +75,7 @@ export class SignalFormsAdvancedShowcaseComponent {
     minLength(schemaPath.items, 1, { message: 'Add at least one item' });
     maxLength(schemaPath.items, 10, { message: 'Maximum 10 items allowed' });
     applyEach(schemaPath.items, itemSchema);
+    validateTree(schemaPath.items, uniqueItemLabelsValidator<AdvancedFormItem>());
 
     hidden(
       schemaPath.discountType,
