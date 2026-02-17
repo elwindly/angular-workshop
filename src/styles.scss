@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@include mat.system-classes();
 
 html,
 body {
