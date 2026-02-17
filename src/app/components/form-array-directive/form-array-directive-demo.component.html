@@ -8,21 +8,18 @@
     >
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="form" class="form-array-demo">
+    <form [formArray]="items" class="form-array-demo">
       <!-- The FormArrayDirective is applied here via formArrayName -->
-      <div formArrayName="items" class="items">
-        @if (items.length === 0) {
-          <p class="empty">No items yet — add one!</p>
-        }
-        @for (ctrl of items.controls; track $index) {
-          <div class="row">
-            <input type="text" [formControl]="ctrl" placeholder="Enter item" />
-            <button type="button" mat-button color="warn" (click)="removeItem($index)">
-              Remove
-            </button>
-          </div>
-        }
-      </div>
+
+      @if (items.length === 0) {
+        <p class="empty">No items yet — add one!</p>
+      }
+      @for (ctrl of items.controls; track $index) {
+        <div class="row">
+          <input type="text" [formControl]="ctrl" placeholder="Enter item" />
+          <button type="button" mat-button color="warn" (click)="removeItem($index)">Remove</button>
+        </div>
+      }
 
       <div class="actions">
         <button type="button" mat-raised-button color="primary" (click)="addItem()">
@@ -33,6 +30,6 @@
     </form>
 
     <h4>Form Value</h4>
-    <pre>{{ form.value | json }}</pre>
+    <pre>{{ items.value | json }}</pre>
   </mat-card-content>
 </mat-card>

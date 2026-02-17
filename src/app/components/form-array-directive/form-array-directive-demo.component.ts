@@ -18,10 +18,6 @@ export class FormArrayDirectiveDemoComponent {
   // Typed reactive form: items is a FormArray of non-null string controls
   readonly items = this.fb.array<string>([]);
 
-  readonly form = this.fb.group({
-    items: this.items,
-  });
-
   addItem(): void {
     this.items.push(this.fb.control<string>(''));
   }
